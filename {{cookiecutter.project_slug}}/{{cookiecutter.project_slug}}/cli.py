@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 """Console script for {{cookiecutter.project_slug}}."""
+# enable absolute imports of this module for Python2.x
+from __future__ import absolute_import
+
 import click
 
 from .{{cookiecutter.project_slug}} import run
