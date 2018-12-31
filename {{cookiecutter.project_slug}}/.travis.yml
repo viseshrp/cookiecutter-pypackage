@@ -25,7 +25,7 @@ deploy:
   password:
     secure: PLEASE_REPLACE_ME
   on:
-    tags: true
+    branch: develop
     repo: {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
     python: 3.6
 {%- endif %}

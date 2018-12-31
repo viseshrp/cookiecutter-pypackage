@@ -2,20 +2,27 @@
 # -*- coding: utf-8 -*-
 
 """The setup script."""
+import io
 
 from setuptools import setup, find_packages
 
-with open('README.rst') as readme_file:
-    readme = readme_file.read()
+# Package meta-data.
+NAME = '{{ cookiecutter.project_slug }}'
+VERSION = '{{ cookiecutter.version }}'
+DESCRIPTION = "{{ cookiecutter.project_short_description }}"
+AUTHOR = "{{ cookiecutter.full_name.replace('\"', '\\\"') }}"
+EMAIL = '{{ cookiecutter.email }}'
+URL = 'https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}'
+REQUIRES_PYTHON = ">=2.7"
+REQUIREMENTS = [{%- if cookiecutter.command_line_interface|lower == 'click' %}'Click>=6.0',{%- endif %} ]
+SETUP_REQUIREMENTS = [{%- if cookiecutter.use_pytest == 'y' %}'pytest-runner',{%- endif %} ]
+TEST_REQUIREMENTS = [{%- if cookiecutter.use_pytest == 'y' %}'pytest',{%- endif %} ]
 
-with open('HISTORY.rst') as history_file:
-    history = history_file.read()
+with io.open('README.rst', 'r', encoding='utf-8') as readme_file:
+    README = readme_file.read()
 
-requirements = [{%- if cookiecutter.command_line_interface|lower == 'click' %}'Click>=6.0',{%- endif %} ]
-
-setup_requirements = [{%- if cookiecutter.use_pytest == 'y' %}'pytest-runner',{%- endif %} ]
-
-test_requirements = [{%- if cookiecutter.use_pytest == 'y' %}'pytest',{%- endif %} ]
+with io.open('HISTORY.rst', 'r', encoding='utf-8') as history_file:
+    HISTORY = history_file.read()
 
 {%- set license_classifiers = {
     'MIT license': 'License :: OSI Approved :: MIT License',
@@ -26,44 +33,50 @@ test_requirements = [{%- if cookiecutter.use_pytest == 'y' %}'pytest',{%- endif 
 } %}
 
 setup(
-    author="{{ cookiecutter.full_name.replace('\"', '\\\"') }}",
-    author_email='{{ cookiecutter.email }}',
+    name=NAME,
+    version=VERSION,
+    description=DESCRIPTION,
+    long_description=README + '\n\n' + HISTORY,
+    keywords='{{ cookiecutter.project_slug }}',
+    author=AUTHOR,
+    author_email=EMAIL,
+    url=URL,
+    packages=find_packages(include=['{{ cookiecutter.project_slug }}']),
+    include_package_data=True,
+{%- if cookiecutter.open_source_license in license_classifiers %}
+    license="{{ cookiecutter.open_source_license }}",
+{%- endif %}
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 4 - Pre-Alpha',
+{%- if 'no' not in cookiecutter.command_line_interface|lower %}
+        'Environment :: Console',
+{%- endif %}
         'Intended Audience :: Developers',
 {%- if cookiecutter.open_source_license in license_classifiers %}
         '{{ license_classifiers[cookiecutter.open_source_license] }}',
 {%- endif %}
+        'Operating System :: OS Independent',
         'Natural Language :: English',
-        "Programming Language :: Python :: 2",
+        'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Topic :: Software Development :: Libraries :: Python Modules',
     ],
-    description="{{ cookiecutter.project_short_description }}",
-    {%- if 'no' not in cookiecutter.command_line_interface|lower %}
+{%- if 'no' not in cookiecutter.command_line_interface|lower %}
     entry_points={
         'console_scripts': [
-            '{{ cookiecutter.project_slug }}={{ cookiecutter.project_slug }}.cli:main',
+            '{{ cookiecutter.project_slug }}={{ cookiecutter.project_slug }}.__main__:main',
         ],
     },
-    {%- endif %}
-    install_requires=requirements,
-{%- if cookiecutter.open_source_license in license_classifiers %}
-    license="{{ cookiecutter.open_source_license }}",
 {%- endif %}
-    long_description=readme + '\n\n' + history,
-    include_package_data=True,
-    keywords='{{ cookiecutter.project_slug }}',
-    name='{{ cookiecutter.project_slug }}',
-    packages=find_packages(include=['{{ cookiecutter.project_slug }}']),
-    setup_requires=setup_requirements,
+    python_requires=REQUIRES_PYTHON,
+    install_requires=REQUIREMENTS,
+    setup_requires=SETUP_REQUIREMENTS,
     test_suite='tests',
-    tests_require=test_requirements,
-    url='https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}',
-    version='{{ cookiecutter.version }}',
+    tests_require=TEST_REQUIREMENTS,
     zip_safe=False,
 )

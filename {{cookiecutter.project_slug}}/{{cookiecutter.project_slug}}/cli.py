@@ -4,15 +4,24 @@
 import sys
 import click
 
+from .{{cookiecutter.project_slug}} import run
 
-@click.command()
+@click.command(context_settings=dict(help_option_names=['-h', '--help']))
 def main(args=None):
-    """Console script for {{cookiecutter.project_slug}}."""
-    click.echo("Replace this message by putting your code into "
-               "{{cookiecutter.project_slug}}.cli.main")
-    click.echo("See click documentation at http://click.pocoo.org/")
-    return 0
+    """
+    CLI tool to
+
+    Example usages:
+
+
+    """
+    try:
+        run(args)
+    except Exception as e:
+        # all other exceptions
+        raise click.ClickException(e)
+
 
 
 if __name__ == "__main__":
-    sys.exit(main())  # pragma: no cover
+    main()  # pragma: no cover
