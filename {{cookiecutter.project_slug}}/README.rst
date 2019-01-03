@@ -29,8 +29,8 @@
 {{ cookiecutter.project_short_description }}
 
 {% if is_open_source %}
-* GitHub: https://github.com/viseshrp/heroku.env
-* PyPI: https://pypi.python.org/pypi/heroku.env
+* GitHub: https://github.com/viseshrp/{{ cookiecutter.project_slug }}
+* PyPI: https://pypi.python.org/pypi/{{ cookiecutter.project_slug }}
 * Free software: {{ cookiecutter.open_source_license }}
 * Documentation: https://{{ cookiecutter.project_slug | replace("_", "-") }}.readthedocs.io.
 {% endif %}
