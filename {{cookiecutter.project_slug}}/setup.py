@@ -14,7 +14,7 @@ AUTHOR = "{{ cookiecutter.full_name.replace('\"', '\\\"') }}"
 EMAIL = '{{ cookiecutter.email }}'
 URL = 'https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}'
 REQUIRES_PYTHON = ">=2.7"
-REQUIREMENTS = [{%- if cookiecutter.command_line_interface|lower == 'click' %}'Click>=6.0',{%- endif %} ]
+REQUIREMENTS = ['future>=0.15.2', {%- if cookiecutter.command_line_interface|lower == 'click' %}'Click>=6.0',{%- endif %} ]
 SETUP_REQUIREMENTS = [{%- if cookiecutter.use_pytest == 'y' %}'pytest-runner',{%- endif %} ]
 TEST_REQUIREMENTS = [{%- if cookiecutter.use_pytest == 'y' %}'pytest',{%- endif %} ]
 
