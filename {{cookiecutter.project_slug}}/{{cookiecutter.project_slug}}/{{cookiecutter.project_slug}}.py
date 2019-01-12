@@ -5,5 +5,5 @@
 from __future__ import unicode_literals  # unicode support for py2
 
 
-def run(args):
+def run(arg):
     pass

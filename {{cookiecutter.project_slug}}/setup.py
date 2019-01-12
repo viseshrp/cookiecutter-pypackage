@@ -14,9 +14,9 @@ AUTHOR = "{{ cookiecutter.full_name.replace('\"', '\\\"') }}"
 EMAIL = '{{ cookiecutter.email }}'
 URL = 'https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}'
 REQUIRES_PYTHON = ">=2.7"
-REQUIREMENTS = ['future>=0.15.2', {%- if cookiecutter.command_line_interface|lower == 'click' %}'Click>=6.0',{%- endif %} ]
-SETUP_REQUIREMENTS = [{%- if cookiecutter.use_pytest == 'y' %}'pytest-runner',{%- endif %} ]
-TEST_REQUIREMENTS = [{%- if cookiecutter.use_pytest == 'y' %}'pytest',{%- endif %} ]
+REQUIREMENTS = ['future>=0.15.2',{%- if cookiecutter.command_line_interface|lower == 'click' %} 'Click>=6.0',{%- endif %} ]
+SETUP_REQUIREMENTS = [{%- if cookiecutter.use_pytest == 'y' %}'pytest-runner',{%- endif %}]
+TEST_REQUIREMENTS = [{%- if cookiecutter.use_pytest == 'y' %}'pytest',{%- endif %}]
 
 with io.open('README.rst', 'r', encoding='utf-8') as readme_file:
     README = readme_file.read()
@@ -47,7 +47,7 @@ setup(
     license="{{ cookiecutter.open_source_license }}",
 {%- endif %}
     classifiers=[
-        'Development Status :: 4 - Pre-Alpha',
+        'Development Status :: 4 - Beta',
 {%- if 'no' not in cookiecutter.command_line_interface|lower %}
         'Environment :: Console',
 {%- endif %}

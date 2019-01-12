@@ -8,10 +8,13 @@ from __future__ import unicode_literals  # unicode support for py2
 import click
 
 from .{{cookiecutter.project_slug}} import run
+from .{{cookiecutter.project_slug}} import __version__
 
 
 @click.command(context_settings=dict(help_option_names=['-h', '--help']))
-def main(args=None):
+@click.version_option(__version__, '-v', '--version')
+@click.argument('myarg')
+def main(myarg):
     """
     CLI tool to
 
@@ -20,7 +23,7 @@ def main(args=None):
 
     """
     try:
-        run(args)
+        run(myarg)
     except Exception as e:
         # all other exceptions
         raise click.ClickException(e)
