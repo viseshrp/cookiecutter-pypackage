@@ -8,7 +8,7 @@ from __future__ import unicode_literals  # unicode support for py2
 import click
 
 from .{{cookiecutter.project_slug}} import run
-from .{{cookiecutter.project_slug}} import __version__
+from . import __version__
 
 
 @click.command(context_settings=dict(help_option_names=['-h', '--help']))
